@@ -82,12 +82,12 @@ TagenvyGenerator.prototype.createSubdirectory = function createSubdirectory() {
 };
 
 TagenvyGenerator.prototype.createPackageJson = function createPackageJson() {
-    h1('Generating package.json...');
+    tagenvy.Art.h1('Generating package.json...');
     this.copy('_package.json', 'package.json');
 };
 
 TagenvyGenerator.prototype.createBowerFiles = function createBowerFiles() {
-    h1('Generating Bower configuration...');
+    tagenvy.Art.h1('Generating Bower configuration...');
     this.copy('_bower.json', 'bower.json');
     this.copy('bowerrc', '.bowerrc');
 };

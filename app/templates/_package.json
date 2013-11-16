@@ -1,5 +1,5 @@
 {
-  "name": "package",
+  "name": "tagenvy-library-<%= config.name.slugified %>",
   "version": "0.0.0",
   "dependencies": {}
 }

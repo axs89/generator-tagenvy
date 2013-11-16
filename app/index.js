@@ -152,7 +152,7 @@ TagenvyGenerator.prototype.createSubdirectory = function createSubdirectory() {
  */
 TagenvyGenerator.prototype.createPackageJson = function createPackageJson() {
     tagenvy.Art.h1('Generating package.json...');
-    this.copy('_package.json', this.destinationDirectory + 'package.json');
+    this.template('_package.json', this.destinationDirectory + 'package.json', { config: this.config });
 };
 
 /**
@@ -160,6 +160,6 @@ TagenvyGenerator.prototype.createPackageJson = function createPackageJson() {
  */
 TagenvyGenerator.prototype.createBowerFiles = function createBowerFiles() {
     tagenvy.Art.h1('Generating Bower configuration...');
-    this.copy('_bower.json', this.destinationDirectory + 'bower.json');
+    this.template('_bower.json', this.destinationDirectory + 'bower.json', { config: this.config });
     this.copy('bowerrc', this.destinationDirectory + '.bowerrc');
 };

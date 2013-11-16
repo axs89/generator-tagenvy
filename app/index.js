@@ -34,6 +34,9 @@ TagenvyGenerator.prototype.askFor = function askFor() {
             type   : 'input',
             name   : 'subdirectory',
             message: 'Please enter a valid subdirectory name:',
+            filter: function(input){
+                return './' + input;
+            },
             validate: function(input){
                 var path = './' + input;
                 if(fs.existsSync(path)){
@@ -55,10 +58,7 @@ TagenvyGenerator.prototype.askFor = function askFor() {
 };
 
 TagenvyGenerator.prototype.createSubdirectory = function createSubdirectory() {
-
-};
-
-TagenvyGenerator.prototype.projectfiles = function projectfiles() {
-    this.copy('editorconfig', '.editorconfig');
-    this.copy('jshintrc', '.jshintrc');
+    tagenvy.Art.h1('Create subdirectory');
+    this.mkdir(this.config.subdirectory);
+    console.log('Created subdirectory ' + this.config.subdirectory);
 };

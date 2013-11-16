@@ -7,9 +7,15 @@ var util = require('util'),
     tagenvy = require('../tagenvy/');
 
 
+/**
+ * Generator constructor
+ */
 var TagenvyGenerator = module.exports = function TagenvyGenerator(args, options, config) {
+
+    // Apply base generator constructor
     yeoman.generators.Base.apply(this, arguments);
 
+    // Event handler that runs when generators has finished
     this.on('end', function () {
 
         // Store handle to current directory
@@ -33,6 +39,7 @@ var TagenvyGenerator = module.exports = function TagenvyGenerator(args, options,
         this.destinationRoot(oldRoot);
     });
 
+    // Event handler that runs after dependencies have been installed
     this.on('dependenciesInstalled', function () {
 
         // Store handle to current directory
@@ -56,15 +63,18 @@ var TagenvyGenerator = module.exports = function TagenvyGenerator(args, options,
 
     });
 
+    // Event handler that runs when Grunt has finished
     this.on('gruntFinished', function () {
         tagenvy.Art.h1('All done!');
         console.log(tagenvy.Art.finished);
         console.log('\n\n');
     });
 
+    // Read package.json
     this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 };
 
+// Inherit prototype methods from Base
 util.inherits(TagenvyGenerator, yeoman.generators.Base);
 
 /**
@@ -75,6 +85,9 @@ TagenvyGenerator.prototype.showWelcome = function showWelcome() {
     console.log(tagenvy.Art.welcome);
 };
 
+/**
+ * Ask questions
+ */
 TagenvyGenerator.prototype.askFor = function askFor() {
     var cb = this.async();
 
@@ -125,17 +138,26 @@ TagenvyGenerator.prototype.askFor = function askFor() {
     }.bind(this));
 };
 
+/**
+ * Create client subdirectory
+ */
 TagenvyGenerator.prototype.createSubdirectory = function createSubdirectory() {
     tagenvy.Art.h1('Creating subdirectory...');
     this.mkdir('./' + this.config.name.slugified);
     console.log('Created subdirectory ' + this.config.name.slugified);
 };
 
+/**
+ * Create package.json
+ */
 TagenvyGenerator.prototype.createPackageJson = function createPackageJson() {
     tagenvy.Art.h1('Generating package.json...');
     this.copy('_package.json', this.destinationDirectory + 'package.json');
 };
 
+/**
+ * Create Bower files
+ */
 TagenvyGenerator.prototype.createBowerFiles = function createBowerFiles() {
     tagenvy.Art.h1('Generating Bower configuration...');
     this.copy('_bower.json', this.destinationDirectory + 'bower.json');

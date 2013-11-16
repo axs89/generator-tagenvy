@@ -11,6 +11,7 @@ var TagenvyGenerator = module.exports = function TagenvyGenerator(args, options,
     yeoman.generators.Base.apply(this, arguments);
 
     this.on('end', function () {
+        this.destinationRoot(this.destinationDirectory);
         this.installDependencies({ skipInstall: options['skip-install'] });
     });
 
@@ -71,6 +72,8 @@ TagenvyGenerator.prototype.askFor = function askFor() {
             }
         };
 
+        this.destinationDirectory = './' + this.config.name.slugified + '/';
+
         cb();
     }.bind(this));
 };
@@ -83,11 +86,11 @@ TagenvyGenerator.prototype.createSubdirectory = function createSubdirectory() {
 
 TagenvyGenerator.prototype.createPackageJson = function createPackageJson() {
     tagenvy.Art.h1('Generating package.json...');
-    this.copy('_package.json', 'package.json');
+    this.copy('_package.json', this.destinationDirectory + 'package.json');
 };
 
 TagenvyGenerator.prototype.createBowerFiles = function createBowerFiles() {
     tagenvy.Art.h1('Generating Bower configuration...');
-    this.copy('_bower.json', 'bower.json');
-    this.copy('bowerrc', '.bowerrc');
+    this.copy('_bower.json', this.destinationDirectory + 'bower.json');
+    this.copy('bowerrc', this.destinationDirectory + '.bowerrc');
 };

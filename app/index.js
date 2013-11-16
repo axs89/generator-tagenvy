@@ -2,17 +2,18 @@
 var util = require('util'),
     path = require('path'),
     yeoman = require('yeoman-generator'),
+    fs = require('fs'),
     tagenvy = require('../tagenvy/');
 
 
 var TagenvyGenerator = module.exports = function TagenvyGenerator(args, options, config) {
-  yeoman.generators.Base.apply(this, arguments);
+    yeoman.generators.Base.apply(this, arguments);
 
-  this.on('end', function () {
-    this.installDependencies({ skipInstall: options['skip-install'] });
-  });
+    this.on('end', function () {
+        this.installDependencies({ skipInstall: options['skip-install'] });
+    });
 
-  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+    this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 };
 
 util.inherits(TagenvyGenerator, yeoman.generators.Base);
@@ -26,31 +27,31 @@ TagenvyGenerator.prototype.showWelcome = function showWelcome() {
 };
 
 TagenvyGenerator.prototype.askFor = function askFor() {
-  var cb = this.async();
+    var cb = this.async();
 
-  var prompts = [{
-    type: 'confirm',
-    name: 'someOption',
-    message: 'Would you like to enable this option?',
-    default: true
-  }];
+    var prompts = [
+        {
+            type   : 'input',
+            name   : 'subdirectory',
+            message: 'Please enter a valid subdirectory name:'
+        }
+    ];
 
-  this.prompt(prompts, function (props) {
-    this.someOption = props.someOption;
+    this.prompt(prompts, function (answers) {
 
-    cb();
-  }.bind(this));
+        this.config = {
+            subdirectory: answers.subdirectory
+        };
+
+        cb();
+    }.bind(this));
 };
 
-TagenvyGenerator.prototype.app = function app() {
-  this.mkdir('app');
-  this.mkdir('app/templates');
+TagenvyGenerator.prototype.createSubdirectory = function createSubdirectory() {
 
-  this.copy('_package.json', 'package.json');
-  this.copy('_bower.json', 'bower.json');
 };
 
 TagenvyGenerator.prototype.projectfiles = function projectfiles() {
-  this.copy('editorconfig', '.editorconfig');
-  this.copy('jshintrc', '.jshintrc');
+    this.copy('editorconfig', '.editorconfig');
+    this.copy('jshintrc', '.jshintrc');
 };

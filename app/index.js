@@ -76,7 +76,13 @@ TagenvyGenerator.prototype.askFor = function askFor() {
 };
 
 TagenvyGenerator.prototype.createSubdirectory = function createSubdirectory() {
-    tagenvy.Art.h1('Create subdirectory');
+    tagenvy.Art.h1('Creating subdirectory...');
     this.mkdir('./' + this.config.name.slugified);
     console.log('Created subdirectory ' + this.config.name.slugified);
+};
+
+TagenvyGenerator.prototype.createBowerFiles = function createBowerFiles() {
+    h1('Generating Bower configuration...');
+    this.copy('_bower.json', 'bower.json');
+    this.copy('bowerrc', '.bowerrc');
 };

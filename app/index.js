@@ -3,6 +3,7 @@ var util = require('util'),
     path = require('path'),
     yeoman = require('yeoman-generator'),
     fs = require('fs'),
+    chalk = require('chalk'),
     tagenvy = require('../tagenvy/');
 
 
@@ -32,25 +33,42 @@ TagenvyGenerator.prototype.askFor = function askFor() {
     var prompts = [
         {
             type   : 'input',
-            name   : 'subdirectory',
-            message: 'Please enter a valid subdirectory name:',
-            filter: function(input){
-                return './' + input;
-            },
+            name   : 'name',
+            message: chalk.yellow('Please enter a unique name for this project:') + '\n\n' +
+                'The project name is used as name of the subdirectory and as part of the generated package name.' + '\n' +
+                'Don\'t use spaces or special characters. If you do, they will be converted to dashes.' + '\n\n' +
+                'Unique project name (e.g. client-one):',
             validate: function(input){
-                var path = './' + input;
-                if(fs.existsSync(path)){
-                    return 'A file or subdirectory with that name already exists, please enter another name';
+                if(/.+/.test(input)){
+                    return true;
                 }
-                return true;
+                return 'Please enter a name';
             }
         }
     ];
 
-    this.prompt(prompts, function (answers) {
+    this.prompt(prompts, function (props) {
 
         this.config = {
-            subdirectory: answers.subdirectory
+
+            // Originally a humanized string like "ClientOne Two_Three"
+            name: {
+
+                // String originally entered by user => "ClientOne Two_Three"
+                original: props.name,
+
+                // Camelized => clientOneTwoThree
+                camelized: this._.camelize(props.name),
+
+                // Dasherized (underscored and camelized to dashes) => client-one-two-three
+                dasherized: this._.dasherize(props.name),
+
+                // Slugified (whitespace and special chars replaced by dashes (great for url's)) => clientone-two-three
+                slugified: this._.slugify(props.name),
+
+                // Array of parts => [ 'clientone', 'two', 'three' ]
+                parts: this._.slugify(props.name).split('-')
+            }
         };
 
         cb();
@@ -59,6 +77,6 @@ TagenvyGenerator.prototype.askFor = function askFor() {
 
 TagenvyGenerator.prototype.createSubdirectory = function createSubdirectory() {
     tagenvy.Art.h1('Create subdirectory');
-    this.mkdir(this.config.subdirectory);
-    console.log('Created subdirectory ' + this.config.subdirectory);
+    this.mkdir('./' + this.config.name.slugified);
+    console.log('Created subdirectory ' + this.config.name.slugified);
 };

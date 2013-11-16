@@ -33,7 +33,14 @@ TagenvyGenerator.prototype.askFor = function askFor() {
         {
             type   : 'input',
             name   : 'subdirectory',
-            message: 'Please enter a valid subdirectory name:'
+            message: 'Please enter a valid subdirectory name:',
+            validate: function(input){
+                var path = './' + input;
+                if(fs.existsSync(path)){
+                    return 'A file or subdirectory with that name already exists, please enter another name';
+                }
+                return true;
+            }
         }
     ];
 

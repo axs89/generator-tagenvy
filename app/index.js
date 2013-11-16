@@ -81,6 +81,11 @@ TagenvyGenerator.prototype.createSubdirectory = function createSubdirectory() {
     console.log('Created subdirectory ' + this.config.name.slugified);
 };
 
+TagenvyGenerator.prototype.createPackageJson = function createPackageJson() {
+    h1('Generating package.json...');
+    this.copy('_package.json', 'package.json');
+};
+
 TagenvyGenerator.prototype.createBowerFiles = function createBowerFiles() {
     h1('Generating Bower configuration...');
     this.copy('_bower.json', 'bower.json');

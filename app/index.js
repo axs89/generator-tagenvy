@@ -1,7 +1,8 @@
 'use strict';
-var util = require('util');
-var path = require('path');
-var yeoman = require('yeoman-generator');
+var util = require('util'),
+    path = require('path'),
+    yeoman = require('yeoman-generator'),
+    tagenvy = require('../tagenvy/');
 
 
 var TagenvyGenerator = module.exports = function TagenvyGenerator(args, options, config) {
@@ -16,11 +17,16 @@ var TagenvyGenerator = module.exports = function TagenvyGenerator(args, options,
 
 util.inherits(TagenvyGenerator, yeoman.generators.Base);
 
+/**
+ * Show welcome
+ */
+TagenvyGenerator.prototype.showWelcome = function showWelcome() {
+    console.log(tagenvy.Art.clear);
+    console.log(tagenvy.Art.welcome);
+};
+
 TagenvyGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
-
-  // have Yeoman greet the user.
-  console.log(this.yeoman);
 
   var prompts = [{
     type: 'confirm',

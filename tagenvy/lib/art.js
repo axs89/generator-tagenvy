@@ -2,6 +2,9 @@ var chalk = require('chalk');
 
 var art = module.exports;
 
+// Message that is shown when finished generating
+art.finished = 'Thank you for using TagEnvy!';
+
 // Welcome message
 art.welcome =
 '\n' +

@@ -11,8 +11,55 @@ var TagenvyGenerator = module.exports = function TagenvyGenerator(args, options,
     yeoman.generators.Base.apply(this, arguments);
 
     this.on('end', function () {
+
+        // Store handle to current directory
+        var oldRoot = this.destinationRoot();
+
+        // Change to client directory and install dependencies
         this.destinationRoot(this.destinationDirectory);
-        this.installDependencies({ skipInstall: options['skip-install'] });
+
+        // Install dependencies
+        tagenvy.Art.h1('Installing dependencies...');
+        this.installDependencies({
+            skipInstall: options['skip-install'],
+            callback: function() {
+
+                // Emit a new event - dependencies installed
+                this.emit('dependenciesInstalled');
+            }.bind(this)
+        });
+
+        // Change back to normal working directory
+        this.destinationRoot(oldRoot);
+    });
+
+    this.on('dependenciesInstalled', function () {
+
+        // Store handle to current directory
+        var oldRoot = this.destinationRoot();
+
+        // Change to client directory and install dependencies
+        this.destinationRoot(this.destinationDirectory);
+
+        // Run grunt
+        tagenvy.Art.h1('Running GruntJS for the first time...');
+        this.spawnCommand('grunt', ['build']).on('exit',
+            function() {
+
+                // Emit a new event - dependencies installed
+                this.emit('gruntFinished');
+            }.bind(this)
+        );
+
+        // Change back to normal working directory
+        this.destinationRoot(oldRoot);
+
+    });
+
+    this.on('gruntFinished', function () {
+        tagenvy.Art.h1('All done!');
+        console.log(tagenvy.Art.finished);
+        console.log('\n\n');
     });
 
     this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));

@@ -1,4 +1,4 @@
-# generator-tagenvy [![Build Status](https://secure.travis-ci.org/jvandemo/generator-tagenvy.png?branch=master)](https://travis-ci.org/jvandemo/generator-tagenvy)
+# generator-tagenvy
 
 A generator for [Yeoman](http://yeoman.io).
 

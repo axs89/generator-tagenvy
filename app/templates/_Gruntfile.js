@@ -25,6 +25,14 @@ module.exports = function (grunt) {
 
         // Check JavaScript code
         jshint: {
+            beforeConcat: {
+                options: {
+                    '-W032': true // Ignore warning 'W032: Unnecessary semicolon'
+                },
+                src: [
+                    '<%%= concat.tagenvy.src %>'
+                ]
+            },
             afterConcat: {
                 options: {
                     '-W032': true // Ignore warning 'W032: Unnecessary semicolon'
@@ -51,7 +59,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default', ['build']);
-    grunt.registerTask('test', ['jshint']);
+    grunt.registerTask('default', ['jshint:beforeConcat', 'build', 'jshint:afterConcat']);
+    grunt.registerTask('test', ['jshint:beforeConcat']);
     grunt.registerTask('build', ['bower_concat', 'concat']);
 };

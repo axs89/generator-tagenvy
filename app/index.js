@@ -178,3 +178,11 @@ TagenvyGenerator.prototype.createTagenvySrcFiles = function createTagenvySrcFile
     tagenvy.Art.h1('Generating tagenvy src files...');
     this.template('src/tagenvy.js', path.resolve(this.destinationClientDirectory, './src/tagenvy.js'), { config: this.config });
 };
+
+/**
+ * Generate readme
+ */
+TagenvyGenerator.prototype.createReadme = function createReadme() {
+    tagenvy.Art.h1('Generating readme...');
+    this.template('README.md', path.resolve(this.destinationClientDirectory, './README.md'), { config: this.config });
+};

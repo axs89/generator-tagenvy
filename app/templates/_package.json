@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
       "grunt": "~0.4.1",
-      "grunt-bower-concat": "~0.1.2"
+      "grunt-bower-concat": "~0.1.2",
+      "grunt-contrib-concat": "~0.3.0"
   }
 }

@@ -143,7 +143,7 @@ TagenvyGenerator.prototype.createSubdirectory = function createSubdirectory() {
  */
 TagenvyGenerator.prototype.createPackageJson = function createPackageJson() {
     tagenvy.Art.h1('Generating package.json...');
-    this.template('_package.json', path.resolve(this.destinationClientDirectory, 'package.json'), { config: this.config });
+    this.template('_package.json', path.resolve(this.destinationClientDirectory, './package.json'), { config: this.config });
 };
 
 /**
@@ -151,8 +151,8 @@ TagenvyGenerator.prototype.createPackageJson = function createPackageJson() {
  */
 TagenvyGenerator.prototype.createBowerFiles = function createBowerFiles() {
     tagenvy.Art.h1('Generating Bower configuration...');
-    this.template('_bower.json', path.resolve(this.destinationClientDirectory, 'bower.json'), { config: this.config });
-    this.copy('bowerrc', path.resolve(this.destinationClientDirectory, '.bowerrc'));
+    this.template('_bower.json', path.resolve(this.destinationClientDirectory, './bower.json'), { config: this.config });
+    this.copy('bowerrc', path.resolve(this.destinationClientDirectory, './.bowerrc'));
 };
 
 /**
@@ -160,7 +160,7 @@ TagenvyGenerator.prototype.createBowerFiles = function createBowerFiles() {
  */
 TagenvyGenerator.prototype.createGruntfiles = function createGruntfiles() {
     tagenvy.Art.h1('Generating Grunt configuration...');
-    this.template('_Gruntfile.js', path.resolve(this.destinationClientDirectory, 'Gruntfile.js'), { config: this.config });
+    this.template('_Gruntfile.js', path.resolve(this.destinationClientDirectory, './Gruntfile.js'), { config: this.config });
 };
 
 /**
@@ -168,7 +168,7 @@ TagenvyGenerator.prototype.createGruntfiles = function createGruntfiles() {
  */
 TagenvyGenerator.prototype.createTagenvyJson = function createTagenvyJson() {
     tagenvy.Art.h1('Creating tagenvy.json...');
-    this.write(path.resolve(this.destinationClientDirectory, 'tagenvy.json'), JSON.stringify(this.config));
+    this.write(path.resolve(this.destinationClientDirectory, './tagenvy.json'), JSON.stringify(this.config));
 };
 
 /**
@@ -176,5 +176,5 @@ TagenvyGenerator.prototype.createTagenvyJson = function createTagenvyJson() {
  */
 TagenvyGenerator.prototype.createTagenvySrcFiles = function createTagenvySrcFiles() {
     tagenvy.Art.h1('Generating tagenvy src files...');
-    this.template('src/tagenvy.js', path.resolve(this.destinationClientDirectory, 'src/tagenvy.js'), { config: this.config });
+    this.template('src/tagenvy.js', path.resolve(this.destinationClientDirectory, './src/tagenvy.js'), { config: this.config });
 };

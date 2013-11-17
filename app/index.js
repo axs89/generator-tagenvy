@@ -163,3 +163,11 @@ TagenvyGenerator.prototype.createBowerFiles = function createBowerFiles() {
     this.template('_bower.json', this.destinationDirectory + 'bower.json', { config: this.config });
     this.copy('bowerrc', this.destinationDirectory + '.bowerrc');
 };
+
+/**
+ * Create Gruntfile.js
+ */
+TagenvyGenerator.prototype.createGruntfiles = function createGruntfiles() {
+    tagenvy.Art.h1('Generating Grunt configuration...');
+    this.template('_Gruntfile.js', this.destinationDirectory + 'Gruntfile.js', { config: this.config });
+};

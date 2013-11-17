@@ -21,12 +21,33 @@ module.exports = function (grunt) {
                 src: ['src/bower.js', 'src/tagenvy.js'],
                 dest: 'dist/tagenvy.js'
             }
+        },
+
+        // Check JavaScript code
+        jshint: {
+            afterConcat: {
+                src: [
+                    '<%%= concat.tagenvy.dest %>'
+                ]
+            },
+            options: {
+                // options here to override JSHint defaults
+                globals: {
+                    jQuery: true,
+                    console: true,
+                    module: true,
+                    document: true,
+                    angular: true
+                },
+                globalstrict: false
+            }
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-bower-concat');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default', ['build']);
+    grunt.registerTask('default', ['build', 'jshint']);
     grunt.registerTask('build', ['bower_concat', 'concat']);
 };

@@ -2,6 +2,8 @@
   "name": "tagenvy-library-<%= config.name.slugified %>",
   "version": "0.0.0",
   "dependencies": {
+      "jquery": "~2.0.3",
+      "underscore": "~1.5.2"
   }
 }
 

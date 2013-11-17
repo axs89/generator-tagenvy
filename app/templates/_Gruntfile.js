@@ -26,6 +26,9 @@ module.exports = function (grunt) {
         // Check JavaScript code
         jshint: {
             afterConcat: {
+                options: {
+                    '-W032': true // Ignore warning 'W032: Unnecessary semicolon'
+                },
                 src: [
                     '<%%= concat.tagenvy.dest %>'
                 ]

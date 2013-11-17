@@ -15,7 +15,7 @@ module.exports = function (grunt) {
         // Concatenate tagenvy.js and _bower.js
         concat: {
             options: {
-                separator: ';'
+                separator: ';\n\n'
             },
             tagenvy: {
                 src: ['src/bower.js', 'src/tagenvy.js'],

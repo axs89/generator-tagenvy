@@ -52,14 +52,29 @@ module.exports = function (grunt) {
                 },
                 globalstrict: false
             }
+        },
+
+        // Uglify tagenvy.js
+        uglify: {
+            options: {
+                banner: '/*! <%%= tagenvy.name.original %> <%%= grunt.template.today("dd-mm-yyyy") %> */\n'
+            },
+            jid: {
+                files: {
+                    'dist/tagenvy.min.js': ['<%%= concat.tagenvy.dest %>']
+                }
+            }
         }
+
+
     });
 
     grunt.loadNpmTasks('grunt-bower-concat');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     grunt.registerTask('default', ['jshint:beforeConcat', 'build', 'jshint:afterConcat']);
     grunt.registerTask('test', ['jshint:beforeConcat']);
-    grunt.registerTask('build', ['bower_concat', 'concat']);
+    grunt.registerTask('build', ['bower_concat', 'concat', 'uglify']);
 };

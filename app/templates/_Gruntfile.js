@@ -1,20 +1,20 @@
 module.exports = function (grunt) {
 
     grunt.initConfig({
+
+        // Read tagenvy.json so we can access the config
         tagenvy: grunt.file.readJSON('tagenvy.json'),
-        concat_bower: {
-            options: {
-                separator: ' ',
-                punctuation: ''
-            },
-            files: {
-                'dist/bower.js': ['bower']
+
+        // Task to concatenate bower components
+        bower_concat: {
+            all: {
+                dest: 'dist/_bower.js'
             }
         }
     });
 
-    grunt.loadNpmTasks('grunt-concat-bower');
+    grunt.loadNpmTasks('grunt-bower-concat');
 
-    grunt.registerTask('default', ['build']);
-    grunt.registerTask('build', ['concat_bower']);
+    grunt.registerTask('default', ['bower_concat']);
+    grunt.registerTask('build', []);
 };

@@ -171,3 +171,11 @@ TagenvyGenerator.prototype.createGruntfiles = function createGruntfiles() {
     tagenvy.Art.h1('Generating Grunt configuration...');
     this.template('_Gruntfile.js', this.destinationDirectory + 'Gruntfile.js', { config: this.config });
 };
+
+/**
+ * Create tagenvy.json
+ */
+TagenvyGenerator.prototype.createTagenvyJson = function createTagenvyJson() {
+    tagenvy.Art.h1('Creating tagenvy.json...');
+    this.write(this.destinationDirectory + 'tagenvy.json', JSON.stringify(this.config));
+};

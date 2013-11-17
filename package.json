@@ -1,6 +1,6 @@
 {
   "name": "generator-tagenvy",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A generator for Yeoman to generate TagEnvy client libraries",
   "keywords": [
     "yeoman-generator"

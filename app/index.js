@@ -179,3 +179,11 @@ TagenvyGenerator.prototype.createTagenvyJson = function createTagenvyJson() {
     tagenvy.Art.h1('Creating tagenvy.json...');
     this.write(this.destinationDirectory + 'tagenvy.json', JSON.stringify(this.config));
 };
+
+/**
+ * Generate tagenvy src files
+ */
+TagenvyGenerator.prototype.createTagenvySrcFiles = function createTagenvySrcFiles() {
+    tagenvy.Art.h1('Generating tagenvy src files...');
+    this.template('src/tagenvy.js', this.destinationDirectory + 'src/tagenvy.js', { config: this.config });
+};

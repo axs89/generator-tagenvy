@@ -1,5 +1,8 @@
 {
   "name": "tagenvy-library-<%= config.name.slugified %>",
   "version": "0.0.0",
-  "dependencies": {}
+  "dependencies": {
+      "grunt": "~0.4.1",
+      "grunt-bower-concat": "~0.1.2"
+  }
 }

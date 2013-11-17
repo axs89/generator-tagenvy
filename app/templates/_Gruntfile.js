@@ -15,6 +15,6 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-bower-concat');
 
-    grunt.registerTask('default', ['bower_concat']);
-    grunt.registerTask('build', []);
+    grunt.registerTask('default', ['build']);
+    grunt.registerTask('build', ['bower_concat']);
 };

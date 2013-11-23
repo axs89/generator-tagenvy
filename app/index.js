@@ -94,6 +94,26 @@ TagenvyGenerator.prototype.askFor = function askFor() {
                 }
                 return 'Please enter a name';
             }
+        },
+        {
+            type: 'checkbox',
+            name: 'bowerDependencies',
+            message: 'Please check the dependencies that you want Bower to include',
+            choices: function (answers) {
+                return [
+                    {
+                        name: 'console-shim',
+                        value: 'console-shim'
+                    }
+                ];
+            },
+            // Convert array of choices to object with booleans
+            filter: function (input) {
+                var _ = yeoman.generators.Base.prototype._;
+                return {
+                    "console-shim": _.contains(input, 'console-shim')
+                }
+            }
         }
     ];
 
@@ -118,7 +138,12 @@ TagenvyGenerator.prototype.askFor = function askFor() {
 
                 // Array of parts => [ 'clientone', 'two', 'three' ]
                 parts: this._.slugify(props.name).split('-')
+            },
+
+            bower: {
+                dependencies: props.bowerDependencies ||{}
             }
+
         };
 
         // Keep track of directories

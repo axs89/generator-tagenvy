@@ -1,11 +1,20 @@
 /*global describe, beforeEach, it*/
 'use strict';
 
-var path = require('path');
-var helpers = require('yeoman-generator').test;
+var path = require('path'),
+    helpers = require('yeoman-generator').test,
+    fs = require('fs'),
+    assert = require('assert'),
+    defaultPromptAnswers = {
+        name: 'client-one',
+        bowerDependencies: {
+            'console-shim' : false
+        }
+    };
 
 
 describe('tagenvy generator', function () {
+
     beforeEach(function (done) {
         helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
             if (err) {
@@ -19,21 +28,18 @@ describe('tagenvy generator', function () {
         }.bind(this));
     });
 
-    it('creates expected files in client directory', function (done) {
+    it('should create expected files in client directory', function (done) {
         var expected = [
             // add files you expect inside client directory
-            '.bowerrc',
-            'bower.json',
             'package.json'
         ];
 
-        helpers.mockPrompt(this.app, {
-            'name': 'client-one'
-        });
+        helpers.mockPrompt(this.app, defaultPromptAnswers);
         this.app.options['skip-install'] = true;
         this.app.run({}, function () {
             helpers.assertFiles(expected);
             done();
         });
     });
+
 });

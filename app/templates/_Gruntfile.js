@@ -19,7 +19,7 @@ module.exports = function (grunt) {
             },
             tagenvy: {
                 src: ['src/bower.js', 'src/tagenvy.js'],
-                dest: 'dist/tagenvy.js'
+                dest: 'dist/<%%= tagenvy.name.slugified %>_tagenvy.js'
             }
         },
 
@@ -59,9 +59,9 @@ module.exports = function (grunt) {
             options: {
                 banner: '/*! <%%= tagenvy.name.original %> <%%= grunt.template.today("dd-mm-yyyy") %> */\n'
             },
-            jid: {
+            tagenvy: {
                 files: {
-                    'dist/tagenvy.min.js': ['<%%= concat.tagenvy.dest %>']
+                    'dist/<%%= tagenvy.name.slugified %>_tagenvy.min.js': ['<%%= concat.tagenvy.dest %>']
                 }
             }
         }

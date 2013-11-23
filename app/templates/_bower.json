@@ -1,7 +1,8 @@
 {
   "name": "tagenvy-library-<%= config.name.slugified %>",
   "version": "0.0.0",
-  "dependencies": {
+  "dependencies": {<% if (config.bower.dependencies['console-shim']) { %>
+      "console-shim": "*"<% } %>
   }
 }
 

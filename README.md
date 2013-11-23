@@ -31,6 +31,10 @@ $ npm test
 
 ## Change log
 
+### 0.2.1
+
+- Added mocha as dependency for production environments
+
 ### 0.2.0
 
 - Added console-shim dependency handler

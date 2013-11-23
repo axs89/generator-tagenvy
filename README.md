@@ -34,14 +34,15 @@ $ npm test
 ### 0.2.1
 
 - Added mocha as dependency for production environments
+- Libraries are now built to dist/<projectname>_tagenvy.js and dist/<projectname>_tagenvy.min.js
 
 ### 0.2.0
 
-- Added console-shim dependency handler
+- Added console-shim support
 
 ### 0.1.0
 
-- Added initial library generator
+- Initial release
 
 ## License
 

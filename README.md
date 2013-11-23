@@ -29,6 +29,16 @@ To run the unit tests:
 $ npm test
 ```
 
+## Change log
+
+### 0.2.0
+
+- Added console-shim dependency handler
+
+### 0.1.0
+
+- Added initial library generator
+
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
